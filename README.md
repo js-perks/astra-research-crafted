@@ -1,54 +1,125 @@
-# Welcome to your Lovable project
+# Astra Academics
 
-## Project info
+**Notebooks for research.**
 
-**URL**: https://lovable.dev/projects/b68d3ca9-727e-4e7b-bff8-b8c226d09599
+A modern, minimalistic website for Astra Academics — premium notebooks designed specifically for researchers, scholars, and graduate students.
 
-## How can I edit this code?
+## About
 
-There are several ways of editing your application.
+Astra Academics creates high-quality notebooks that support deep thinking with clean layouts, smooth paper, and durable design built for years of ideas and experiments.
 
-**Use Lovable**
+## Live Site
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b68d3ca9-727e-4e7b-bff8-b8c226d09599) and start prompting.
+- **Lovable URL**: https://lovable.dev/projects/b68d3ca9-727e-4e7b-bff8-b8c226d09599
+- **GitHub Pages**: (configure deployment below)
 
-Changes made via Lovable will be committed automatically to this repo.
+## Deploying to GitHub Pages
 
-**Use your preferred IDE**
+### Step 1: Connect to GitHub (if not already connected)
+1. In Lovable editor, click **GitHub → Connect to GitHub**
+2. Authorize the Lovable GitHub App
+3. Click **Create Repository**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Step 2: Configure GitHub Pages
+1. Go to your GitHub repository
+2. Navigate to **Settings → Pages**
+3. Under "Build and deployment":
+   - Source: **GitHub Actions**
+4. Create `.github/workflows/deploy.yml` in your repository with this content:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```yaml
+name: Deploy to GitHub Pages
 
-Follow these steps:
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+5. If your repository name is not your username (e.g., `username/astra-academics`), update `vite.config.ts`:
+   - Add `base: '/astra-academics/'` to the config
+
+6. Commit and push — your site will deploy automatically!
+
+### Step 3: Access Your Site
+Your site will be available at: `https://yourusername.github.io/repository-name/`
+
+## Local Development
+
+### Prerequisites
+- Node.js & npm ([install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
+
+### Setup
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
+# Navigate to directory
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
+# Install dependencies
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The site will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Editing
 
-**Use GitHub Codespaces**
+**Via Lovable (Recommended)**
+- Visit the [Lovable Project](https://lovable.dev/projects/b68d3ca9-727e-4e7b-bff8-b8c226d09599)
+- Changes sync automatically to GitHub
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+**Via IDE**
+- Clone repo and push changes
+- Changes sync automatically to Lovable
+
+**Via GitHub**
+- Edit files directly in GitHub interface
+- Click "Edit" button (pencil icon) on any file
+
+**Via GitHub Codespaces**
+- Click "Code" → "Codespaces" → "New codespace"
+- Edit in browser-based VS Code
 
 ## What technologies are used for this project?
 
