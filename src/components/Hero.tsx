@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { CartDrawer } from "@/components/CartDrawer";
 import heroImage from "@/assets/hero-research.jpg";
 
 const Hero = () => {
@@ -9,10 +8,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute top-6 right-6 z-20">
-        <CartDrawer />
-      </div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <div 
         className="absolute inset-0 z-0"
         style={{
