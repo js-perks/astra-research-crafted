@@ -111,7 +111,7 @@ const Products = () => {
                     </CardDescription>
                     {price && (
                       <p className="text-xl font-semibold text-primary">
-                        {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+                        £{parseFloat(price.amount).toFixed(2)}
                       </p>
                     )}
                   </CardHeader>
