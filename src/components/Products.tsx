@@ -60,7 +60,7 @@ const Products = () => {
   }
 
   return (
-    <section id="products" className="py-24 px-6 bg-muted/30">
+    <section id="products" className="py-20 px-6 bg-muted/50">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-primary mb-4 tracking-tight">
